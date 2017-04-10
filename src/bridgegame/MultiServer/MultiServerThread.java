@@ -4,9 +4,8 @@ import java.net.*;
 import java.io.*; 
 
 public class MultiServerThread extends Thread { 
-	private Socket socket = null; 
+	private Socket socket; 
 	public MultiServerThread(Socket socket) { 
-		super();
 		this.socket = socket; 
 	} 
 
