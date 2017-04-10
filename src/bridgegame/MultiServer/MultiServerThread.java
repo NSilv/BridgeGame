@@ -27,8 +27,6 @@ public class MultiServerThread extends Thread {
 			inputLine = in.readLine();
 			out.println(/*outputLine*/); 
 
-
-
 			out.close(); 
 			in.close(); 
 			socket.close(); 
