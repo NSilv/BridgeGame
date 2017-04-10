@@ -5,17 +5,6 @@
  */
 package bridgegame;
 
-/**
- *
- * @author s01412
- */
 public class BridgeGame {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-    }
-    
+	
 }
