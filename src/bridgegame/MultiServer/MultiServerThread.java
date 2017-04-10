@@ -6,7 +6,7 @@ import java.io.*;
 public class MultiServerThread extends Thread { 
 	private Socket socket = null; 
 	public MultiServerThread(Socket socket) { 
-		super("MultiServerThread");//TODO WTF? 
+		super();
 		this.socket = socket; 
 	} 
 
