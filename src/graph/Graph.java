@@ -6,7 +6,6 @@
 package graph;
 
 import static java.util.Arrays.stream;
-import java.util.function.Consumer;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 import utils.*;
