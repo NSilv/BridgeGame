@@ -1,4 +1,4 @@
-package bridgegame.multiserver;
+package bridgegame.MultiServer;
 
 import java.net.*; 
 import java.io.*; 
@@ -17,7 +17,7 @@ public class MultiServer {
         } 
  
         while (listening) 
-        	new MultiServerThread(serverSocket.accept()).start(); 
+        new MultiServerThread(serverSocket.accept()).start(); 
  
         serverSocket.close(); 
     } 

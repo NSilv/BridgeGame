@@ -1,4 +1,4 @@
-package bridgegame.multiserver;
+package bridgegame.MultiServer;
 
 import java.net.*; 
 import java.io.*; 
