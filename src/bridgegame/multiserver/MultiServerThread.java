@@ -1,4 +1,4 @@
-package bridgegame.multiserver;
+package bridgegame.MultiServer;
 
 import java.net.*; 
 import java.io.*; 
@@ -12,20 +12,26 @@ public class MultiServerThread extends Thread {
 	public void run() { 
 
 		try { 
-			PrintWriter out = new PrintWriter(socket.getOutputStream(), true); 
-			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream())); 
+			   // Create input and output streams to client
+			    ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+			    ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
 
-			String inputLine, outputLine; 
+			    // Read modify
+			    // TODO here
+
+			    /* Create Message object and retrive information */
+			    //inFromClient.readObject();
+
+			    /* Modify the message object */
+			    //inMsg.getMessage().toUpperCase());
+
+			    /* Send the modified Message object back */
+			    outToClient.writeObject(/*object*/);    
 
 			/*TODO thread creato, invio del grafo e inizio trasmissione tabella posizioni aggiornata 
-      Ricevo spostamenti dal client, una volta ottenuti tutti gli spostamenti 
+      				Ricevo spostamenti dal client, una volta ottenuti tutti gli spostamenti 
 			 */
-
-			out.println(/*outputLine*/); 
-
-			inputLine = in.readLine();
-			out.println(/*outputLine*/); 
-
+			
 			out.close(); 
 			in.close(); 
 			socket.close(); 
