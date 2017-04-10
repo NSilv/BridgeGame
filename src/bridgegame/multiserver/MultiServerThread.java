@@ -13,8 +13,8 @@ public class MultiServerThread extends Thread {
 
 		try { 
 			   // Create input and output streams to client
-			    ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
-			    ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
+			    ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+			    ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
 			    // Read modify
 			    // TODO here
@@ -26,7 +26,7 @@ public class MultiServerThread extends Thread {
 			    //inMsg.getMessage().toUpperCase());
 
 			    /* Send the modified Message object back */
-			    outToClient.writeObject(/*object*/);    
+			    out.writeObject(/*object*/);    
 
 			/*TODO thread creato, invio del grafo e inizio trasmissione tabella posizioni aggiornata 
       				Ricevo spostamenti dal client, una volta ottenuti tutti gli spostamenti 
