@@ -1,12 +1,21 @@
 package bridgegame.multiserver;
 
-import java.net.*; 
+import java.net.*;
+import java.util.concurrent.ConcurrentHashMap;
+
+import graph.Graph;
+
 import java.io.*; 
 
-public class MultiServerThread extends Thread { 
+public class MultiServerThread<T> extends Thread { 
 	private Socket socket; 
-	public MultiServerThread(Socket socket) { 
+	ConcurrentHashMap<MultiServerThread<T>, T> playerData;
+	private Graph<T> map;
+	
+	public MultiServerThread(Socket socket, ConcurrentHashMap<MultiServerThread<T>, T> playerData, Graph<T> map) { 
 		this.socket = socket; 
+		this.playerData = playerData;
+		this.map = map;
 	} 
 
 	public void run() { 
@@ -26,7 +35,7 @@ public class MultiServerThread extends Thread {
 			    //inMsg.getMessage().toUpperCase());
 
 			    /* Send the modified Message object back */
-			    out.writeObject(/*object*/);    
+			    out.writeObject(new Object());    
 
 			/*TODO thread creato, invio del grafo e inizio trasmissione tabella posizioni aggiornata 
       				Ricevo spostamenti dal client, una volta ottenuti tutti gli spostamenti 

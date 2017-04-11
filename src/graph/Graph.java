@@ -35,4 +35,8 @@ public class Graph<T> {
     public void addEdges(Tuple3<T,T,DefaultEdge>... edges){
         stream(edges).forEach(this::addEdge);
     }
+    
+    public static  <T> Graph<T> random(){
+    	return new Graph<T>();
+    }
 }
