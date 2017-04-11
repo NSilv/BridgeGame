@@ -1,16 +1,22 @@
 package bridgegame.gui;
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
+import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
 import org.jgrapht.ListenableGraph;
 import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.ListenableDirectedWeightedGraph;
+import org.jgrapht.graph.SimpleWeightedGraph;
 
 import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxEvent;
+import com.mxgraph.view.mxGraphSelectionModel;
 
 
 public class GraphDemo {
@@ -18,19 +24,31 @@ public class GraphDemo {
 	        JFrame frame = new JFrame("DemoGraph");
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	        ListenableGraph<String, MyEdge> g = buildGraph();
+	        SimpleWeightedGraph<String, MyEdge> g = buildGraph();
 	        JGraphXAdapter<String, MyEdge> graphAdapter = 
 	                new JGraphXAdapter<String, MyEdge>(g);
 
 	        mxIGraphLayout layout = new mxCircleLayout(graphAdapter);
 	        layout.execute(graphAdapter.getDefaultParent());
-
-	        frame.add(new mxGraphComponent(graphAdapter));
+	        final mxGraphComponent comp = new mxGraphComponent(graphAdapter);
+	        frame.add(comp);
 
 	        frame.pack();
 	        frame.setLocationByPlatform(true);
 	        frame.setVisible(true);
-	    }
+	        graphAdapter.setCellsEditable(false);
+	        
+	        graphAdapter.getSelectionModel().addListener(mxEvent.CHANGE, (sender, evt) -> {
+	        	log(evt.toString());
+	        	log(((mxGraphSelectionModel)sender).getCells()[0]);
+	        	for(Object cell : ((mxGraphSelectionModel)sender).getCells()){
+	        		log("cell: " + graphAdapter.getLabel(cell));
+	        	}
+	        });
+	        
+	        
+	        
+	 }
 
 	    public static void main(String[] args) {
 	        SwingUtilities.invokeLater(new Runnable() {
@@ -47,9 +65,9 @@ public class GraphDemo {
 	        }
 	    }
 
-	    public static ListenableGraph<String, MyEdge> buildGraph() {
-	        ListenableDirectedWeightedGraph<String, MyEdge> g = 
-	            new ListenableDirectedWeightedGraph<String, MyEdge>(MyEdge.class);
+	    public static SimpleWeightedGraph<String, MyEdge> buildGraph() {
+	        SimpleWeightedGraph<String, MyEdge> g = 
+	            new SimpleWeightedGraph<String, MyEdge>(MyEdge.class);
 
 	        String x1 = "x1";
 	        String x2 = "x2";
@@ -68,5 +86,8 @@ public class GraphDemo {
 	        g.setEdgeWeight(e, 3);
 
 	        return g;
+	    }
+	    public static <T>void log(T x){
+	    	System.out.println(x);
 	    }
 }
