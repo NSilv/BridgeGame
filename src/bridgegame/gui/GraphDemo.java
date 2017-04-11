@@ -15,6 +15,7 @@ import org.jgrapht.graph.SimpleWeightedGraph;
 import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraphSelectionModel;
 
@@ -25,24 +26,29 @@ public class GraphDemo {
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	        SimpleWeightedGraph<String, MyEdge> g = buildGraph();
-	        JGraphXAdapter<String, MyEdge> graphAdapter = 
-	                new JGraphXAdapter<String, MyEdge>(g);
+	        JGraphXAdapter<String, MyEdge> graphAdapter = new JGraphXAdapter<String, MyEdge>(g){
+	        	  public boolean isCellMovable(Object cell)
+	        	  {
+	        	    return !getModel().isEdge(cell);
+	        	  }
+	        };
 
 	        mxIGraphLayout layout = new mxCircleLayout(graphAdapter);
 	        layout.execute(graphAdapter.getDefaultParent());
 	        final mxGraphComponent comp = new mxGraphComponent(graphAdapter);
 	        frame.add(comp);
-
 	        frame.pack();
 	        frame.setLocationByPlatform(true);
 	        frame.setVisible(true);
 	        graphAdapter.setCellsEditable(false);
 	        
+	        Object[] cell = graphAdapter.getSelectionCells();
+	        
 	        graphAdapter.getSelectionModel().addListener(mxEvent.CHANGE, (sender, evt) -> {
 	        	log(evt.toString());
 	        	log(((mxGraphSelectionModel)sender).getCells()[0]);
-	        	for(Object cell : ((mxGraphSelectionModel)sender).getCells()){
-	        		log("cell: " + graphAdapter.getLabel(cell));
+	        	for(Object cell1 : ((mxGraphSelectionModel)sender).getCells()){
+	        		log("cell: " + graphAdapter.getLabel(cell1));
 	        	}
 	        });
 	        
