@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.concurrent.ConcurrentHashMap;
 
-import graph.Graph; 
+import bridgegame.graph.Graph; 
 
 public class MultiServerThread<T> extends Thread { 
 	private Socket socket; 

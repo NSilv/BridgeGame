@@ -3,20 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils;
+package bridgegame.utils;
 
 /**
  *
  * @author s01412
  */
-public class Tuple3<A,B,C> {
+public class Tuple2<A,B> {
+    
     public final A first;
     public final B second;
-    public final C third;
     
-    public Tuple3(A first, B second, C third){
+    public Tuple2(A first, B second){
         this.first = first;
         this.second = second;
-        this.third = third;
     }
 }

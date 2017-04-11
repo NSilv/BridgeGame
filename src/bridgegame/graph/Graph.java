@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package graph;
+package bridgegame.graph;
 
 import static java.util.Arrays.stream;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
-import utils.*;
+
+import bridgegame.utils.Tuple3;
 
 /**
  *

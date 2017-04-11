@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import graph.Graph;
+import bridgegame.graph.Graph;
 
 import java.io.*; 
 
