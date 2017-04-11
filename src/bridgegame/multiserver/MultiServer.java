@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleWeightedGraph;
+
 import bridgegame.graph.Graph;
 
 import java.io.*; 
@@ -13,7 +16,7 @@ public class MultiServer {
 
 	static List<MultiServerThread<String>> players = new ArrayList<>();
 	static ConcurrentHashMap<MultiServerThread<String>, String> playerData = new ConcurrentHashMap<>();
-	static Graph<String> graph;
+	static SimpleWeightedGraph<String,DefaultEdge> graph;
 	
 	public static void main(String[] args) throws IOException { 
 
@@ -33,7 +36,7 @@ public class MultiServer {
 		
 
 		while (players.size() != numGiocatori){				
-			players.add(new MultiServerThread<String>(serverSocket.accept(), playerData, graph));
+			//players.add(new MultiServerThread<String>(serverSocket.accept(), playerData, graph));
 		}
 		players.stream().forEach(Thread::start);
 		playGame();
