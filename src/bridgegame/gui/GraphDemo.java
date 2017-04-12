@@ -157,6 +157,9 @@ public class GraphDemo implements ActionListener{
 		panel.add(startButton);
 		
 		frame.setContentPane(panel);
+		f.setJMenuBar(jmb);
+		f.setVisible(true); 
+		
 	}
 
 
