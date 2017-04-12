@@ -1,8 +1,9 @@
 package bridgegame.gui;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -84,10 +85,12 @@ public class GraphDemo implements ActionListener{
 	}    
 
 	public static void startMenu(){
-		JFrame f = new JFrame("Menu Demo");
-		f.setSize(220, 200);
+		JFrame frame = new JFrame("Menu Demo");
+		frame.setSize(220, 200);
+		
+		JPanel panel = new JPanel(new FlowLayout());
 
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JMenuBar jmb = new JMenuBar();
 
 		JMenu jmFile = new JMenu("File");
@@ -114,11 +117,11 @@ public class GraphDemo implements ActionListener{
 		JButton startButton = new JButton("Start");
 
 		startButton.addActionListener((ActionEvent event) -> {
-			f.dispose();
+			frame.dispose();
 			createAndShowGui();
 		});
 		startButton.setSize(100, 200);
-		f.add(startButton);
+		frame.add(startButton);
 
 		JMenu e = new JMenu("E");
 		e.add(new JMenuItem("F"));
@@ -148,8 +151,12 @@ public class GraphDemo implements ActionListener{
 		d.addActionListener(listener);
 		jmiAbout.addActionListener(listener);
 
-		f.setJMenuBar(jmb);
-		f.setVisible(true); 
+		frame.setJMenuBar(jmb);
+		frame.setVisible(true);
+		
+		panel.add(startButton);
+		
+		frame.setContentPane(panel);
 	}
 
 
