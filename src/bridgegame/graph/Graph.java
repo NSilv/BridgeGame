@@ -7,8 +7,10 @@ package bridgegame.graph;
 
 import static java.util.Arrays.stream;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
+import bridgegame.gui.GraphDemo.MyEdge;
 import bridgegame.utils.Tuple3;
 
 /**
@@ -38,7 +40,44 @@ public class Graph<T> {
         stream(edges).forEach(this::addEdge);
     }*/
     
-    public static  <T> SimpleWeightedGraph<T, DefaultEdge> random(){
-    	return new SimpleWeightedGraph<T,DefaultEdge>(DefaultEdge.class);
+    public static  SimpleWeightedGraph<String, DefaultWeightedEdge> random(){
+        SimpleWeightedGraph<String, DefaultWeightedEdge> g = 
+	            new SimpleWeightedGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
+
+        int nVertex = 8;
+        String[][] AdMatrix = new String[nVertex][nVertex];
+        
+        for(int i = 0; i < nVertex; i++){
+        	String name = String.valueOf((int)(Math.random()*9)) + String.valueOf((int)(Math.random()*9));
+        	AdMatrix[0][i] = AdMatrix[i][0] = name;
+        	g.addVertex(AdMatrix[0][i]);
+        }
+        
+        int rnd;
+        for(int i = 1; i < nVertex; i++){
+        	for(int j = 1; j < nVertex; j++){
+        		if(i != j){
+        			rnd = (int) (Math.random()*2+1) -1;
+        			AdMatrix[i][j] = String.valueOf(rnd);
+        			System.out.print(rnd);
+        		} 
+        	}
+        }
+        
+        DefaultWeightedEdge e;
+        for(int i = 1; i < nVertex; i++){
+        	for(int j = 1; j < nVertex; j++){
+        		System.out.println(AdMatrix[i][0]+" - "+AdMatrix[0][j]);
+        		if(i != j && AdMatrix[i][j].compareTo("0") == 1){
+        			e = g.addEdge(AdMatrix[i][0].toString(),AdMatrix[0][j].toString());
+        			System.out.println(e);
+        			if(e != null){
+        				rnd = (int)(Math.random()*15+1);
+        				g.setEdgeWeight(e, rnd);
+        			}
+        		}
+        	}
+        }
+        return g;
     }
 }

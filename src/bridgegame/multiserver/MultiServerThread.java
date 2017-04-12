@@ -6,14 +6,17 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleWeightedGraph;
+
 import bridgegame.graph.Graph; 
 
-public class MultiServerThread<T> extends Thread { 
+public class MultiServerThread extends Thread { 
 	private Socket socket; 
-	ConcurrentHashMap<MultiServerThread<T>, T> playerData;
-	private Graph<T> map;
+	ConcurrentHashMap<String, String> playerData;
+	private SimpleWeightedGraph<String,DefaultEdge> map;
 	
-	public MultiServerThread(Socket socket, ConcurrentHashMap<MultiServerThread<T>, T> playerData, Graph<T> map) { 
+	public MultiServerThread(Socket socket, ConcurrentHashMap<String,String> playerData, SimpleWeightedGraph<String,DefaultEdge> map) { 
 		this.socket = socket; 
 		this.playerData = playerData;
 		this.map = map;
