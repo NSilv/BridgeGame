@@ -60,13 +60,11 @@ public class GraphDemo implements ActionListener{
 	        	for(Object cell1 : ((mxGraphSelectionModel)sender).getCells()){
 	        		log("cell: " + graphAdapter.getLabel(cell1));
 	        	}
-	        });
-	        
-	        
-	        
+	        });    
 	 	}
 
 	    public static void main(String[] args) {
+	    	startMenu();
 	        SwingUtilities.invokeLater(new Runnable() {
 	            public void run() {
 	                createAndShowGui();
@@ -83,10 +81,7 @@ public class GraphDemo implements ActionListener{
 
 	    public static <T>void log(T x){
 	    	System.out.println(x);
-	    }
-	    
-	    
-//-------------------------------------------------------------------------------------------	    
+	    }    
 	    
 	    public void startMenu(){
 	    	JFrame f = new JFrame("Menu Demo");
