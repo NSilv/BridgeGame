@@ -32,6 +32,11 @@ import bridgegame.graph.Graph;
 
 
 public class GraphDemo implements ActionListener{
+/*
+ * Il main è in fondo
+ */
+	
+//CREATE AND SHOW GUY
 	private static void createAndShowGui(){
 		JFrame frame = new JFrame("DemoGraph");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,13 +70,7 @@ public class GraphDemo implements ActionListener{
 		});    
 	}
 
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				startMenu();
-			}
-		});
-	}
+
 
 	public static class MyEdge extends DefaultWeightedEdge {
 		@Override
@@ -84,15 +83,36 @@ public class GraphDemo implements ActionListener{
 		System.out.println(x);
 	}    
 
+//MENU
 	public static void startMenu(){
-		JFrame frame = new JFrame("Menu Demo");
-		frame.setSize(220, 200);
+	//Creazione frame
 		
+		//Creazione jframe
+		JFrame frame = new JFrame("Menu Demo");
+		frame.setSize(440, 400);
+		
+		//Creazione jPanel gridLayout
 		JPanel panel = new JPanel(new GridLayout(4,1));
-
+		
+		//Setto chiusura frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+	//Creo il listener
+		ActionListener listener = new ActionListener(){
+			public void actionPerformed(ActionEvent ae) {
+				String comStr = ae.getActionCommand();
+				System.out.println(comStr + " Selected");
+			}
+		};
+		
+		
+	//Creazione menù
+		
+		//Setto il menù
 		JMenuBar jmb = new JMenuBar();
-
+		
+		//Setto file
 		JMenu jmFile = new JMenu("File");
 		JMenuItem jmiOpen = new JMenuItem("Open");
 		JMenuItem jmiClose = new JMenuItem("Close");
@@ -103,9 +123,11 @@ public class GraphDemo implements ActionListener{
 		jmFile.add(jmiSave);
 		jmFile.addSeparator();
 		jmFile.add(jmiExit);
-		jmb.add(jmFile);
+		jmb.add(jmFile);		//aggiungo file al menuBar
 
+		//Setto options
 		JMenu jmOptions = new JMenu("Options");
+		
 		JMenu a = new JMenu("A");
 		JMenuItem b = new JMenuItem("B");
 		JMenuItem c = new JMenuItem("C");
@@ -113,27 +135,22 @@ public class GraphDemo implements ActionListener{
 		a.add(b);
 		a.add(c);
 		a.add(d);
-		jmOptions.add(a);
+		jmOptions.add(a);	//Aggiungo a alle opzioni	
 
 		JMenu e = new JMenu("E");
 		e.add(new JMenuItem("F"));
 		e.add(new JMenuItem("G"));
-		jmOptions.add(e);
+		jmOptions.add(e);	//Aggiungo e alle opzioni	
 
-		jmb.add(jmOptions);
+		jmb.add(jmOptions);		//aggiungo options al menuBar
 
+		//Setto help
 		JMenu jmHelp = new JMenu("Help");
 		JMenuItem jmiAbout = new JMenuItem("About");
 		jmHelp.add(jmiAbout);
-		jmb.add(jmHelp);
+		jmb.add(jmHelp);		//aggiungo help al menuBar
 
-		ActionListener listener = new ActionListener(){
-			public void actionPerformed(ActionEvent ae) {
-				String comStr = ae.getActionCommand();
-				System.out.println(comStr + " Selected");
-			}
-		};
-
+		//Setto il listener nei vari campi
 		jmiOpen.addActionListener(listener);
 		jmiClose.addActionListener(listener);
 		jmiSave.addActionListener(listener);
@@ -142,9 +159,7 @@ public class GraphDemo implements ActionListener{
 		c.addActionListener(listener);
 		d.addActionListener(listener);
 		jmiAbout.addActionListener(listener);
-
-		frame.setJMenuBar(jmb);
-		frame.setVisible(true);
+	
 		
 	//Creazione componenti
 		
@@ -186,17 +201,28 @@ public class GraphDemo implements ActionListener{
 		panel.add(startButton);
 		
 		frame.setContentPane(panel);
+		
 		frame.setJMenuBar(jmb);
 		frame.setVisible(true); 
 		
 	}
 
 
-
 	@Override
 	public void actionPerformed(ActionEvent ae){
 		String comStr = ae.getActionCommand();
 		System.out.println(comStr + " Selected");
+	}
+	
+	
+	
+//M A I N
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				startMenu();
+			}
+		});
 	}
 
 
