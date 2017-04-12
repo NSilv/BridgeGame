@@ -1,8 +1,14 @@
 package bridgegame.gui;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
@@ -24,8 +30,8 @@ import bridgegame.graph.Graph;
 
 
 
-public class GraphDemo {
-	 private static void createAndShowGui() {
+public class GraphDemo implements ActionListener{
+	 private static void createAndShowGui(){
 	        JFrame frame = new JFrame("DemoGraph");
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -58,7 +64,7 @@ public class GraphDemo {
 	        
 	        
 	        
-	 }
+	 	}
 
 	    public static void main(String[] args) {
 	        SwingUtilities.invokeLater(new Runnable() {
@@ -78,4 +84,77 @@ public class GraphDemo {
 	    public static <T>void log(T x){
 	    	System.out.println(x);
 	    }
+	    
+	    public static void startMenu(){
+	    	JFrame f = new JFrame("Menu Demo");
+		    f.setSize(220, 200);
+	
+		    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    JMenuBar jmb = new JMenuBar();
+	
+		    JMenu jmFile = new JMenu("File");
+		    JMenuItem jmiOpen = new JMenuItem("Open");
+		    JMenuItem jmiClose = new JMenuItem("Close");
+		    JMenuItem jmiSave = new JMenuItem("Save");
+		    JMenuItem jmiExit = new JMenuItem("Exit");
+		    jmFile.add(jmiOpen);
+		    jmFile.add(jmiClose);
+		    jmFile.add(jmiSave);
+		    jmFile.addSeparator();
+		    jmFile.add(jmiExit);
+		    jmb.add(jmFile);
+	
+		    JMenu jmOptions = new JMenu("Options");
+		    JMenu a = new JMenu("A");
+		    JMenuItem b = new JMenuItem("B");
+		    JMenuItem c = new JMenuItem("C");
+		    JMenuItem d = new JMenuItem("D");
+		    a.add(b);
+		    a.add(c);
+		    a.add(d);
+		    jmOptions.add(a);
+		    JButton startButton = new JButton("Start");
+	
+		    startButton.addActionListener((ActionEvent event) -> {
+		    	System.exit(0);
+		    });
+		    startButton.setSize(100, 200);
+		    f.add(startButton);
+		    		    
+		    JMenu e = new JMenu("E");
+		    e.add(new JMenuItem("F"));
+		    e.add(new JMenuItem("G"));
+		    jmOptions.add(e);
+	
+		    jmb.add(jmOptions);
+	
+		    JMenu jmHelp = new JMenu("Help");
+		    JMenuItem jmiAbout = new JMenuItem("About");
+		    jmHelp.add(jmiAbout);
+		    jmb.add(jmHelp);
+	
+		    jmiOpen.addActionListener(this);
+		    jmiClose.addActionListener(this);
+		    jmiSave.addActionListener(this);
+		    jmiExit.addActionListener(this);
+		    b.addActionListener(this);
+		    c.addActionListener(this);
+		    d.addActionListener(this);
+		    jmiAbout.addActionListener(this);
+	
+		    f.setJMenuBar(jmb);
+		    f.setVisible(true);
+	    	
+		    public void actionPerformed(ActionEvent ae) {
+		    	String comStr = ae.getActionCommand();
+		    	System.out.println(comStr + " Selected");
+		    }
+	    }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	    
 }
