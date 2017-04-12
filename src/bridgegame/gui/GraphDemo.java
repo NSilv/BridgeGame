@@ -83,7 +83,7 @@ public class GraphDemo implements ActionListener{
 	    	System.out.println(x);
 	    }    
 	    
-	    public void startMenu(){
+	    public static void startMenu(){
 	    	JFrame f = new JFrame("Menu Demo");
 		    f.setSize(220, 200);
 	
@@ -131,18 +131,27 @@ public class GraphDemo implements ActionListener{
 		    jmHelp.add(jmiAbout);
 		    jmb.add(jmHelp);
 	
-		    jmiOpen.addActionListener(this);
-		    jmiClose.addActionListener(this);
-		    jmiSave.addActionListener(this);
-		    jmiExit.addActionListener(this);
-		    b.addActionListener(this);
-		    c.addActionListener(this);
-		    d.addActionListener(this);
-		    jmiAbout.addActionListener(this);
+		    ActionListener listener = new ActionListener(){
+		    	public void actionPerformed(ActionEvent ae) {
+			        String comStr = ae.getActionCommand();
+			        System.out.println(comStr + " Selected");
+			    }
+		    };
+		    
+		    jmiOpen.addActionListener(listener);
+		    jmiClose.addActionListener(listener);
+		    jmiSave.addActionListener(listener);
+		    jmiExit.addActionListener(listener);
+		    b.addActionListener(listener);
+		    c.addActionListener(listener);
+		    d.addActionListener(listener);
+		    jmiAbout.addActionListener(listener);
 	
 		    f.setJMenuBar(jmb);
 		    f.setVisible(true); 
 	    }
+	    
+	    
 	    
 	    @Override
 	    public void actionPerformed(ActionEvent ae){
