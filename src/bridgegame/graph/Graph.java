@@ -43,40 +43,51 @@ public class Graph<T> {
     public static  SimpleWeightedGraph<String, DefaultWeightedEdge> random(){
         SimpleWeightedGraph<String, DefaultWeightedEdge> g = 
 	            new SimpleWeightedGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
-
-        int nVertex = 8;
-        String[][] AdMatrix = new String[nVertex][nVertex];
         
-        for(int i = 0; i < nVertex; i++){
+        int notTheActualNofVertex = 2;
+        int nVertex = 1+notTheActualNofVertex;
+        
+        String[][] AdMatrix = new String[nVertex][nVertex];
+        Boolean[][] bul = new Boolean[nVertex][nVertex];
+        
+        AdMatrix[0][0] = "0";
+        for(int i = 1; i < nVertex; i++){
         	String name = String.valueOf((int)(Math.random()*9)) + String.valueOf((int)(Math.random()*9));
         	AdMatrix[0][i] = AdMatrix[i][0] = name;
         	g.addVertex(AdMatrix[0][i]);
         }
         
-        int rnd;
         for(int i = 1; i < nVertex; i++){
         	for(int j = 1; j < nVertex; j++){
         		if(i != j){
-        			rnd = (int) (Math.random()*2+1) -1;
-        			AdMatrix[i][j] = String.valueOf(rnd);
-        			System.out.print(rnd);
-        		} 
+        			AdMatrix[i][j] = String.valueOf((int) (Math.random()*2+1) -1);
+        		}else AdMatrix[i][i] = "0";
         	}
         }
         
-        DefaultWeightedEdge e;
+        for(int i = 0; i < nVertex; i++){
+        	for(int j = 0; j < nVertex; j++){
+        		System.out.print(AdMatrix[i][j]+" ");
+        	}
+        	System.out.println();
+        }
+        
+        DefaultWeightedEdge e;        
         for(int i = 1; i < nVertex; i++){
         	for(int j = 1; j < nVertex; j++){
-        		System.out.println(AdMatrix[i][0]+" - "+AdMatrix[0][j]);
-        		if(i != j && AdMatrix[i][j].compareTo("0") == 1){
-        			e = g.addEdge(AdMatrix[i][0].toString(),AdMatrix[0][j].toString());
-        			System.out.println(e);
-        			if(e != null){
-        				rnd = (int)(Math.random()*15+1);
-        				g.setEdgeWeight(e, rnd);
-        			}
-        		}
+        		if(AdMatrix[i][j].compareTo("1") == 0 && AdMatrix[i][0]!=AdMatrix[0][j]){
+        			bul[i][j] = true;
+        			e = g.addEdge(AdMatrix[i][0],AdMatrix[0][j]);
+    				if(e != null) g.setEdgeWeight(e, (double)(Math.random()*15+1));
+        		}        		
         	}
+        }
+        
+        for(int i = 0; i < nVertex; i++){
+        	for(int j = 0; j < nVertex; j++){
+        		System.out.print(bul[i][j]+" ");
+        	}
+        	System.out.println();
         }
         return g;
     }
