@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 
 import org.jgrapht.ListenableGraph;
 import org.jgrapht.ext.JGraphXAdapter;
+import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.ListenableDirectedWeightedGraph;
 import org.jgrapht.graph.SimpleWeightedGraph;
@@ -19,14 +20,17 @@ import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraphSelectionModel;
 
+import bridgegame.graph.Graph;
+
+
 
 public class GraphDemo {
 	 private static void createAndShowGui() {
 	        JFrame frame = new JFrame("DemoGraph");
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	        SimpleWeightedGraph<String, MyEdge> g = buildGraph();
-	        JGraphXAdapter<String, MyEdge> graphAdapter = new JGraphXAdapter<String, MyEdge>(g){
+	        SimpleWeightedGraph<String, DefaultWeightedEdge> g = Graph.random();
+	        JGraphXAdapter<String, DefaultWeightedEdge> graphAdapter = new JGraphXAdapter<String, DefaultWeightedEdge>(g){
 	        	  public boolean isCellMovable(Object cell)
 	        	  {
 	        	    return !getModel().isEdge(cell);
@@ -71,28 +75,6 @@ public class GraphDemo {
 	        }
 	    }
 
-	    public static SimpleWeightedGraph<String, MyEdge> buildGraph() {
-	        SimpleWeightedGraph<String, MyEdge> g = 
-	            new SimpleWeightedGraph<String, MyEdge>(MyEdge.class);
-
-	        String x1 = "x1";
-	        String x2 = "x2";
-	        String x3 = "x3";
-
-	        g.addVertex(x1);
-	        g.addVertex(x2);
-	        g.addVertex(x3);
-
-	        MyEdge e = g.addEdge(x1, x2);
-	        g.setEdgeWeight(e, 1);
-	        e = g.addEdge(x2, x3);
-	        g.setEdgeWeight(e, 2);
-
-	        e = g.addEdge(x3, x1);
-	        g.setEdgeWeight(e, 3);
-
-	        return g;
-	    }
 	    public static <T>void log(T x){
 	    	System.out.println(x);
 	    }

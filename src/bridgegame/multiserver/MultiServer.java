@@ -14,8 +14,8 @@ import java.io.*;
 
 public class MultiServer { 
 
-	static List<MultiServerThread<String>> players = new ArrayList<>();
-	static ConcurrentHashMap<MultiServerThread<String>, String> playerData = new ConcurrentHashMap<>();
+	static List<MultiServerThread> players = new ArrayList<>();
+	static ConcurrentHashMap<String, String> playerData = new ConcurrentHashMap<>();
 	static SimpleWeightedGraph<String,DefaultEdge> graph;
 	
 	public static void main(String[] args) throws IOException { 
@@ -25,7 +25,7 @@ public class MultiServer {
 		players = new ArrayList<>();
 		playerData = new ConcurrentHashMap<>();
 		
-		graph = Graph.random();
+		//graph = Graph.random();
 		
 		try { 
 			serverSocket = new ServerSocket(4444); 
@@ -35,8 +35,8 @@ public class MultiServer {
 		
 		
 
-		while (players.size() != numGiocatori){				
-			//players.add(new MultiServerThread<String>(serverSocket.accept(), playerData, graph));
+		while (players.size() < numGiocatori){			
+			players.add(new MultiServerThread(serverSocket.accept(), playerData, graph));
 		}
 		players.stream().forEach(Thread::start);
 		playGame();
@@ -44,6 +44,9 @@ public class MultiServer {
 	}
 	
 	static void playGame() {
-		
+		boolean won = false;
+		while(!won){
+			//fare cose
+		}
 	}
 }
