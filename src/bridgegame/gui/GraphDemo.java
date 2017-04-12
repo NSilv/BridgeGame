@@ -88,7 +88,7 @@ public class GraphDemo implements ActionListener{
 		JFrame frame = new JFrame("Menu Demo");
 		frame.setSize(220, 200);
 		
-		JPanel panel = new JPanel(new FlowLayout());
+		JPanel panel = new JPanel(new GridLayout(4,1));
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JMenuBar jmb = new JMenuBar();
@@ -114,14 +114,6 @@ public class GraphDemo implements ActionListener{
 		a.add(c);
 		a.add(d);
 		jmOptions.add(a);
-		JButton startButton = new JButton("Start");
-
-		startButton.addActionListener((ActionEvent event) -> {
-			frame.dispose();
-			createAndShowGui();
-		});
-		startButton.setSize(100, 200);
-		frame.add(startButton);
 
 		JMenu e = new JMenu("E");
 		e.add(new JMenuItem("F"));
@@ -154,6 +146,43 @@ public class GraphDemo implements ActionListener{
 		frame.setJMenuBar(jmb);
 		frame.setVisible(true);
 		
+	//Creazione componenti
+		
+		//bottone
+		JButton startButton = new JButton("Start");
+		startButton.addActionListener((ActionEvent event) -> {
+			frame.dispose();
+			createAndShowGui();
+		});
+		startButton.setSize(100, 200);
+		frame.add(startButton);
+		
+		//label inserisci nickname
+		JLabel lInsNN = new JLabel("Inserisci nickname");
+		
+		//textbox inserisci nickname
+		JTextField tbInsNN = new JTextField();
+		
+		//label inserisci ip
+		JLabel lInsIP = new JLabel("Inserisci nickname");
+				
+		//textbox inserisci ip
+		JTextField tbInsIP = new JTextField();
+		
+		//label inserisci porta
+		JLabel lInsPort = new JLabel("Inserisci nickname");
+						
+		//textbox inserisci porta
+		JTextField tbInsPort = new JTextField();
+		
+		
+	//Aggiunta componenti al panel
+		panel.add(lInsNN);
+		panel.add(tbInsNN);
+		panel.add(lInsIP);
+		panel.add(tbInsIP);
+		panel.add(lInsPort);
+		panel.add(tbInsPort);
 		panel.add(startButton);
 		
 		frame.setContentPane(panel);
