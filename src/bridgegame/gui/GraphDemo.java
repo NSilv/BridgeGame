@@ -19,6 +19,8 @@ import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraphSelectionModel;
 
+import bridgegame.gui.GraphDemo_2.MyEdge;
+
 
 public class GraphDemo {
 	 private static void createAndShowGui() {
@@ -75,6 +77,39 @@ public class GraphDemo {
 	        SimpleWeightedGraph<String, MyEdge> g = 
 	            new SimpleWeightedGraph<String, MyEdge>(MyEdge.class);
 
+	        int nVertex = 8;
+	        String[][] AdMatrix = new String[nVertex][nVertex];
+	        
+	        for(int i = 0; i < nVertex; i++){
+	        	String name = String.valueOf((int)(Math.random()*9)) + String.valueOf((int)(Math.random()*9));
+	        	AdMatrix[0][i] = AdMatrix[i][0] = name;
+	        	g.addVertex(AdMatrix[0][i]);
+	        }
+	        
+	        int rnd;
+	        for(int i = 1; i < nVertex; i++){
+	        	for(int j = 1; j < nVertex; j++){
+	        		if(i != j){
+	        			rnd = (int) (Math.random()*2+1) -1;
+	        			AdMatrix[i][j] = String.valueOf(rnd);
+	        			System.out.print(rnd);
+	        		} 
+	        	}
+	        }
+	        
+	        MyEdge e;
+	        for(int i = 1; i < nVertex; i++){
+	        	for(int j = 1; j < nVertex; j++){
+	        		System.out.println(AdMatrix[i][0]+" - "+AdMatrix[0][j]);
+	        		if(i != j && AdMatrix[i][j].compareTo("0") == 1){
+	        			e = g.addEdge(AdMatrix[i][0].toString(),AdMatrix[0][j].toString());
+	        			
+	        			rnd = (int)(Math.random()*15+1);
+	        			g.setEdgeWeight(e, rnd);
+	        		}
+	        	}
+	        }
+	        /*
 	        String x1 = "x1";
 	        String x2 = "x2";
 	        String x3 = "x3";
@@ -90,7 +125,7 @@ public class GraphDemo {
 
 	        e = g.addEdge(x3, x1);
 	        g.setEdgeWeight(e, 3);
-
+*/
 	        return g;
 	    }
 	    public static <T>void log(T x){
