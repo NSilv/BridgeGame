@@ -149,15 +149,11 @@ public class GraphDemo implements ActionListener{
 		    f.setVisible(true); 
 	    }
 	    
+	    @Override
 	    public void actionPerformed(ActionEvent ae){
 	    	String comStr = ae.getActionCommand();
 	    	System.out.println(comStr + " Selected");
 	    }
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
 	    
 }
